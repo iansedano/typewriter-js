@@ -20,6 +20,7 @@
  * @typedef {Object} TypewriterElementNode
  * @property {"element"} type
  * @property {string} tagName
+ * @property {string} className
  * @property {TypewriterNode[]} children
  */
 
@@ -31,6 +32,7 @@
  * @typedef {Object} TypewriterAction
  * @property {"append-word" | "append-element" | "end"} type
  * @property {string} value
+ * @property {string} [className]
  */
 
 /**
@@ -40,7 +42,7 @@
  * @property {string} [truncationText]
  */
 
-export function typewriter() {
+function typewriter() {
   const typewriterElements = document.querySelectorAll("[data-typewriter]");
   typewriterElements.forEach((el) => {
     const options = JSON.parse(el.getAttribute("data-typewriter"));
@@ -49,7 +51,7 @@ export function typewriter() {
 }
 
 /**
- * @param {Node} HTML
+ * @param {HTMLElement} HTML
  * @returns {TypewriterElementNode}
  */
 function tokenizeHTML(HTML) {
@@ -58,6 +60,7 @@ function tokenizeHTML(HTML) {
   return {
     type: "element",
     tagName: HTML.nodeName,
+    className: HTML.className,
     children: Array.from(HTML.childNodes).map((node) => {
       // With all the children of the element...
       if (node.nodeType === 3) {
@@ -111,7 +114,11 @@ function* streamActions(tokens) {
   // We iterate over the children of the TypewriterElementNode.
   for (const node of tokens.children) {
     if (node.type === "element") {
-      yield { type: "append-element", value: node.tagName };
+      yield {
+        type: "append-element",
+        value: node.tagName,
+        className: node.className,
+      };
       yield* streamActions(node);
     } else if (node.type === "sentence") {
       // If the token is a sentence, we iterate over its children.
@@ -128,6 +135,9 @@ function* streamActions(tokens) {
   yield { type: "end", value: "" };
 }
 
+/**
+ * @returns {TypewriterOptions}
+ */
 function defaultOptions() {
   return {
     truncateFromWordIndex: 20,
@@ -136,7 +146,7 @@ function defaultOptions() {
   };
 }
 
-export class Typewriter {
+class Typewriter {
   /**
    * @param {HTMLElement} el
    * @param {TypewriterOptions} options
@@ -145,7 +155,6 @@ export class Typewriter {
     this.options = { ...defaultOptions(), ...options };
     this.el = el;
     const tokens = tokenizeHTML(el);
-    console.log(tokens, getTokensLength(tokens));
     if (getTokensLength(tokens) <= this.options.truncateFromWordIndex) {
       return;
     }
@@ -182,6 +191,7 @@ export class Typewriter {
         this.wordsUsed++;
       } else if (action.type === "append-element") {
         const newElement = document.createElement(action.value);
+        newElement.className = action.className;
         this.currentContainer.appendChild(newElement);
         this.currentContainer = newElement;
       } else if (action.type === "end") {
@@ -200,3 +210,5 @@ export class Typewriter {
 export function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+typewriter();
