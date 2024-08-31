@@ -21,7 +21,7 @@ Using HTML data attributes, you can create a typewriter effect on text based ele
 
 - `data-typewriter`: The element that will be animated.
 - `data-typewriter-from`: The starting index of the text.
-- `data-typewriter-delay`: The delay between each character in `ms`.
+- `data-typewriter-delay`: The delay between each token in `ms`.
 - `data-typewriter-button-text`: The text of the button that will reveal the rest of the text.
 
 ## Building and Development
@@ -40,4 +40,3 @@ You'll end up with various output files in the `dist` directory:
 - `typewriter-babel-mjs.js`: ES module format with Babel.
 
 Each type will also have gzipped versions and their corresponding source maps.
-
