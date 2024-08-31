@@ -4,43 +4,39 @@
 </div>
 */
 
-/**
- * @typedef {Object} TypewriterWordNode
- * @property {"word"} type
- * @property {string} value
- */
+interface TypewriterWordNode {
+  type: "word";
+  value: string;
+}
 
-/**
- * @typedef {Object} TypewriterSentenceNode
- * @property {"sentence"} type
- * @property {TypewriterWordNode[]} children
- */
+interface TypewriterSentenceNode {
+  type: "sentence";
+  children: TypewriterWordNode[];
+}
 
-/**
- * @typedef {Object} TypewriterElementNode
- * @property {"element"} type
- * @property {string} tagName
- * @property {string} className
- * @property {TypewriterNode[]} children
- */
+interface TypewriterElementNode {
+  type: "element";
+  tagName: string;
+  className: string;
+  children: TypewriterNode[];
+}
 
-/**
- * @typedef {TypewriterWordNode | TypewriterElementNode | TypewriterSentenceNode} TypewriterNode
- */
+type TypewriterNode =
+  | TypewriterWordNode
+  | TypewriterElementNode
+  | TypewriterSentenceNode;
 
-/**
- * @typedef {Object} TypewriterAction
- * @property {"append-word" | "append-element" | "end"} type
- * @property {string} value
- * @property {string} [className]
- */
+interface TypewriterAction {
+  type: "append-word" | "append-element" | "end";
+  value: string;
+  className?: string;
+}
 
-/**
- * @typedef {Object} TypewriterOptions
- * @property {number} [truncateFromWordIndex]
- * @property {number} [speed]
- * @property {string} [truncationText]
- */
+interface TypewriterOptions {
+  truncateFromWordIndex?: number;
+  speed?: number;
+  truncationText?: string;
+}
 
 function typewriter() {
   const typewriterElements = document.querySelectorAll("[data-typewriter]");
@@ -50,11 +46,7 @@ function typewriter() {
   });
 }
 
-/**
- * @param {HTMLElement} HTML
- * @returns {TypewriterElementNode}
- */
-function tokenizeHTML(HTML) {
+function tokenizeHTML(HTML: HTMLElement): TypewriterElementNode {
   // We return one single TypewriterElementNode which is essentially a
   // basic representation of a DOM element.
   return {
@@ -77,19 +69,18 @@ function tokenizeHTML(HTML) {
         };
       } else if (node.nodeType === 1) {
         // if it's an element node...
-        return tokenizeHTML(node); // ...we recursively tokenize it.
+        return tokenizeHTML(node as HTMLElement); // ...we recursively tokenize it.
       }
     }),
   };
 }
 
-/**
- * @param {TypewriterElementNode} tokens
- * @returns {number}
- */
-function getTokensLength(tokens) {
+function getTokensLength(tokens: TypewriterElementNode): number {
   let count = 0;
+  console.log(tokens, tokens.children);
   for (const node of tokens.children) {
+    console.log(node);
+    // if (node == undefined) continue;
     if (node.type === "sentence") {
       for (const word of node.children) {
         /*
@@ -104,15 +95,14 @@ function getTokensLength(tokens) {
   return count;
 }
 
-/**
- * @param {TypewriterElementNode} tokens
- * @returns {Generator<TypewriterAction>}
- */
-function* streamActions(tokens) {
+function* streamActions(
+  tokens: TypewriterElementNode
+): Generator<TypewriterAction> {
   // Create a stream of tokens by yielding actions to perform on the DOM.
 
   // We iterate over the children of the TypewriterElementNode.
   for (const node of tokens.children) {
+    if (node == undefined) continue;
     if (node.type === "element") {
       yield {
         type: "append-element",
@@ -135,10 +125,7 @@ function* streamActions(tokens) {
   yield { type: "end", value: "" };
 }
 
-/**
- * @returns {TypewriterOptions}
- */
-function defaultOptions() {
+function defaultOptions(): TypewriterOptions {
   return {
     truncateFromWordIndex: 20,
     speed: 100,
@@ -147,11 +134,13 @@ function defaultOptions() {
 }
 
 class Typewriter {
-  /**
-   * @param {HTMLElement} el
-   * @param {TypewriterOptions} options
-   */
-  constructor(el, options) {
+  private options: TypewriterOptions;
+  private el: HTMLElement;
+  private actions: Generator<TypewriterAction>;
+  private wordsUsed: number;
+  private currentContainer: HTMLElement;
+
+  constructor(el: HTMLElement, options: TypewriterOptions) {
     this.options = { ...defaultOptions(), ...options };
     this.el = el;
     const tokens = tokenizeHTML(el);
@@ -175,12 +164,11 @@ class Typewriter {
     });
   }
 
-  /**
-   * @param {number} words
-   * @param {number} [delay=100]
-   * @param {() => void} [finish=() => {}]
-   */
-  async type(words, delay = 100, finish = () => {}) {
+  async type(
+    words: number,
+    delay: number = 100,
+    finish: () => void = () => {}
+  ) {
     while (this.wordsUsed < words) {
       const action = this.actions.next().value;
       if (action === undefined) break;
@@ -195,7 +183,8 @@ class Typewriter {
         this.currentContainer.appendChild(newElement);
         this.currentContainer = newElement;
       } else if (action.type === "end") {
-        this.currentContainer = this.currentContainer.parentElement;
+        this.currentContainer = this.currentContainer
+          .parentElement as HTMLElement;
       }
       await sleep(delay);
     }
@@ -203,11 +192,7 @@ class Typewriter {
   }
 }
 
-/**
- * @param {number} ms
- * @returns {Promise<void>}
- */
-export function sleep(ms) {
+export function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 

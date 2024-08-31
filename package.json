@@ -1,0 +1,33 @@
+{
+  "name": "typewriter",
+  "version": "0.1.0",
+  "description": "Typewriter effects configurable from HTML",
+  "main": "dist/typewriter.js",
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c",
+    "watch": "rollup -c --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iansedano/typewriter-js.git"
+  },
+  "author": "Ian Currie Sedano",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iansedano/typewriter-js/issues"
+  },
+  "homepage": "https://github.com/iansedano/typewriter-js#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.25.4",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "rollup": "^4.21.2",
+    "rollup-plugin-analyzer": "^4.0.0",
+    "rollup-plugin-gzip": "^4.0.1",
+    "rollup-plugin-includepaths": "^0.2.4",
+    "tslib": "^2.7.0",
+    "typescript": "^5.5.4"
+  }
+}
