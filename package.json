@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "rollup -c",
-    "watch": "rollup -c --watch"
+    "dev": "rollup -c --watch"
   },
   "repository": {
     "type": "git",
