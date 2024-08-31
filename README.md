@@ -1,5 +1,7 @@
 # Typewriter effect
 
+![Peek 2024-08-31 18-05](https://github.com/user-attachments/assets/644a4f36-556c-4baa-a3c9-56b1d17d0199)
+
 ```html
 <p
   data-typewriter
@@ -38,3 +40,4 @@ You'll end up with various output files in the `dist` directory:
 - `typewriter-babel-mjs.js`: ES module format with Babel.
 
 Each type will also have gzipped versions and their corresponding source maps.
+
