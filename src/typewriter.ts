@@ -20,7 +20,7 @@ export class Typewriter {
     this.currentContainer = el;
     this.type(this.options.truncateFromWordIndex, 0, () => {
       const button = document.createElement("span");
-      button.classList.add("text-blue-500", "hover:cursor-pointer");
+      button.classList.add("typewriter-more-button");
       const trunc = document.createTextNode(this.options.truncationText);
       button.appendChild(trunc);
       button.addEventListener("click", () => {
