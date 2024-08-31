@@ -29,10 +29,8 @@ export function tokenizeHTML(HTML: HTMLElement): TypewriterElementNode {
 
 export function getTokensLength(tokens: TypewriterElementNode): number {
   let count = 0;
-  console.log(tokens, tokens.children);
   for (const node of tokens.children) {
-    console.log(node);
-    // if (node == undefined) continue;
+    if (node == undefined) continue;
     if (node.type === "sentence") {
       for (const word of node.children) {
         /*
