@@ -8,7 +8,7 @@ import typescript from "@rollup/plugin-typescript";
 
 const INCLUDED_FILE_EXTENSIONS = [".js", ".ts"];
 const JS_ROOT = "./src";
-const INPUT_FILE = "typewriter.ts";
+const INPUT_FILE = "index.ts";
 const NAME = "typewriter";
 
 const inputFilePath = path.join(JS_ROOT, INPUT_FILE);
@@ -31,7 +31,7 @@ const config = {
   treeshake: "recommended",
   plugins: [
     includePaths(includePathOptions),
-    typescript(),
+    typescript({ tsconfig: "./tsconfig.json" }),
     !isProduction && analyze({ summaryOnly: true }),
   ],
   output: [

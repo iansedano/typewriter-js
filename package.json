@@ -2,7 +2,7 @@
   "name": "typewriter",
   "version": "0.1.0",
   "description": "Typewriter effects configurable from HTML",
-  "main": "dist/typewriter.js",
+  "main": "dist/typewriter.mjs",
   "type": "module",
   "scripts": {
     "build": "rollup -c",
