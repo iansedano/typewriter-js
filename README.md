@@ -36,11 +36,13 @@ $ npm run dev # for development
 $ npm run build # for production
 ```
 
-You'll end up with various output files in the `dist` directory:
+You'll end up with various output formats in the `dist` directory:
 
-- `typewriter-iife.js`: IIFE format.
-- `typewriter-mjs.js`: ES module format.
-- `typewriter-babel-iife.js`: IIFE format with Babel.
-- `typewriter-babel-mjs.js`: ES module format with Babel.
+- [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE)
+- [ES module](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
+- IIFE with [Babel](https://babeljs.io/) [preset env](https://babeljs.io/docs/babel-preset-env/)
+- ES module with Babel preset env
 
 Each type will also have gzipped versions and their corresponding source maps.
+
+The smallest version is the `typewriter.mjs.gz` file representing the ES module with gzip compression, which is currently at 1KB.
