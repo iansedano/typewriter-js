@@ -10,22 +10,23 @@
   data-typewriter-delay="100"
   data-typewriter-button-text="...more"
 >
-  Morbi fringilla <strong>convallis</strong> sapien, id pulvinar odio
-  volutpat. Hi omnes lingua, <em class="green">institutis</em>, legibus
-  inter se differunt. Non equidem invideo, miror magis posuere velit
-  aliquet. Quid securi etiam tamquam eu
-  <code class="blue">fugiat</code> nulla pariatur. Inmensae subtilitatis,
-  obscuris et malesuada fames. Fictum, deserunt mollit anim laborum
-  astutumque!
+  Morbi fringilla <strong>convallis</strong> sapien, id pulvinar odio volutpat.
+  Hi omnes lingua, <em class="green">institutis</em>, legibus inter se
+  differunt. Non equidem invideo, miror magis posuere velit aliquet. Quid securi
+  etiam tamquam eu <code class="blue">fugiat</code> nulla pariatur. Inmensae
+  subtilitatis, obscuris et malesuada fames. Fictum, deserunt mollit anim
+  laborum astutumque!
 </p>
+
+<!-- See demo/index.html for full demo -->
 ```
 
 Using HTML data attributes, you can create a typewriter effect on text based elements.
 
 - `data-typewriter`: The element that will be animated.
-- `data-typewriter-from`: The starting index of the text.
+- `data-typewriter-from`: The starting word of the text (if text is not long enough then nothing will happen).
 - `data-typewriter-delay`: The delay between each token in `ms`.
-- `data-typewriter-button-text`: The text of the button that will reveal the rest of the text.
+- `data-typewriter-button-text`: The text of the button that will reveal the rest of the text (this button gets assigned the class `typewriter-more-button` which you can then style as you wish). After being clicked, it dissapears.
 
 ## Building and Development
 
