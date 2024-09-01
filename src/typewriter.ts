@@ -37,7 +37,7 @@ export class Typewriter {
       if (action === undefined) break;
       if (action.type === "append-word") {
         this.currentContainer.appendChild(
-          document.createTextNode(action.value + " ")
+          document.createTextNode(action.value)
         );
         this.wordsUsed++;
       } else if (action.type === "append-element") {

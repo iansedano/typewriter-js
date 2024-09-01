@@ -34,10 +34,7 @@ export function getTokensLength(tokens: TypewriterElementNode): number {
     if (node == undefined) continue;
     if (node.type === "sentence") {
       for (const word of node.children) {
-        /*
-        This is a hack, this should probably be dealt with when tokenizing as there will likely be an edge case where this won't work. However, this fix worked for one edge case I had where newlines at the end of a sentence caused the "more" option to appear, but clicking on it did nothing because all that was added were two newlines.
-        */
-        if (word.value.trim() !== "") count++;
+        count++;
       }
     } else if (node.type === "element") {
       count += getTokensLength(node);
