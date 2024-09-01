@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "build": "rollup -c",
-    "dev": "rollup -c --watch"
+    "dev": "rollup -c --watch",
+    "test": "vitest"
   },
   "repository": {
     "type": "git",
@@ -23,11 +24,13 @@
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.6",
+    "jsdom": "^25.0.0",
     "rollup": "^4.21.2",
     "rollup-plugin-analyzer": "^4.0.0",
     "rollup-plugin-gzip": "^4.0.1",
     "rollup-plugin-includepaths": "^0.2.4",
     "tslib": "^2.7.0",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.5"
   }
 }
