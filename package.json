@@ -5,7 +5,7 @@
   "main": "dist/typewriter.mjs",
   "type": "module",
   "scripts": {
-    "build": "rollup -c",
+    "build": "cross-env NODE_ENV=production rollup -c",
     "dev": "rollup -c --watch",
     "test": "vitest"
   },
@@ -24,6 +24,7 @@
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.6",
+    "cross-env": "^7.0.3",
     "jsdom": "^25.0.0",
     "rollup": "^4.21.2",
     "rollup-plugin-analyzer": "^4.0.0",
