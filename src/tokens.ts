@@ -12,12 +12,7 @@ export function tokenizeHTML(HTML: HTMLElement): TypewriterElementNode {
         return {
           type: "sentence",
           // ...we split the text into words...
-          children: node.textContent
-            ?.split(" ")
-            .filter((word) => word !== "") // ...and filter out empty strings.
-            .map((word) => {
-              return { type: "word", value: word };
-            }),
+          children: textToWords(node.textContent),
         };
       } else if (node.nodeType === 1) {
         // if it's an element node...
@@ -25,6 +20,12 @@ export function tokenizeHTML(HTML: HTMLElement): TypewriterElementNode {
       }
     }),
   };
+}
+
+function textToWords(text: string): TypewriterWordNode[] {
+  return text.match(/\s*\S+\s*/g).map((word) => {
+    return { type: "word", value: word };
+  });
 }
 
 export function getTokensLength(tokens: TypewriterElementNode): number {

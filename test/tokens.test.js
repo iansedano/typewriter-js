@@ -11,7 +11,7 @@ test("tokenizeHTML", () => {
     tagName: "DIV",
     className: "foo",
     children: [
-      { type: "sentence", children: [{ type: "word", value: "Hello" }] },
+      { type: "sentence", children: [{ type: "word", value: "Hello " }] },
       {
         type: "element",
         tagName: "SPAN",
