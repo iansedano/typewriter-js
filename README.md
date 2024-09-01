@@ -1,19 +1,22 @@
 # Typewriter effect
 
-![Peek 2024-08-31 18-05](https://github.com/user-attachments/assets/644a4f36-556c-4baa-a3c9-56b1d17d0199)
+![Peek 2024-09-01 15-18](https://github.com/user-attachments/assets/34187f4b-58e3-4a9f-9a43-79ad436bbc87)
 
 ```html
 <p
+  class="card"
   data-typewriter
   data-typewriter-from="10"
   data-typewriter-delay="100"
   data-typewriter-button-text="...more"
 >
-  Morbi fringilla <strong>convallis</strong> sapien, id pulvinar odio volutpat.
-  Hi omnes lingua, <em>institutis</em>, legibus inter se differunt. Non equidem
-  invideo, miror magis posuere velit aliquet. Quid securi etiam tamquam eu
-  <code>fugiat</code> nulla pariatur. Inmensae subtilitatis, obscuris et
-  malesuada fames. Fictum, deserunt mollit anim laborum astutumque!
+  Morbi fringilla <strong>convallis</strong> sapien, id pulvinar odio
+  volutpat. Hi omnes lingua, <em class="green">institutis</em>, legibus
+  inter se differunt. Non equidem invideo, miror magis posuere velit
+  aliquet. Quid securi etiam tamquam eu
+  <code class="blue">fugiat</code> nulla pariatur. Inmensae subtilitatis,
+  obscuris et malesuada fames. Fictum, deserunt mollit anim laborum
+  astutumque!
 </p>
 ```
 
