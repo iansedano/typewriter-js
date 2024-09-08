@@ -36,19 +36,30 @@ export class Typewriter {
       const action = this.actions.next().value;
       if (action === undefined) break;
       if (action.type === "append-word") {
-        this.currentContainer.appendChild(
-          document.createTextNode(action.value)
-        );
+        await new Promise((resolve) => {
+          requestAnimationFrame(() => {
+            this.currentContainer.appendChild(
+              document.createTextNode(action.value)
+            );
+            resolve(null);
+          });
+        });
         this.wordsUsed++;
       } else if (action.type === "append-element") {
-        const newElement = document.createElement(action.value);
-        newElement.className = action.className;
-        this.currentContainer.appendChild(newElement);
-        this.currentContainer = newElement;
+        await new Promise((resolve) => {
+          requestAnimationFrame(() => {
+            const newElement = document.createElement(action.value);
+            newElement.className = action.className;
+            this.currentContainer.appendChild(newElement);
+            this.currentContainer = newElement;
+            resolve(null);
+          });
+        });
       } else if (action.type === "end") {
         this.currentContainer = this.currentContainer
           .parentElement as HTMLElement;
       }
+
       await sleep(delay);
     }
     finish();
